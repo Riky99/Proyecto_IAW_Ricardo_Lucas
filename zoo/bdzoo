@@ -1,0 +1,56 @@
+create database zoo;
+use zoo;
+
+create table usuarios (
+	
+    idUsuario int unsigned auto_increment primary key,
+    nombre varchar(50) not null,
+    apellidos varchar(50) not null,
+    contraseña varchar(64) not null,
+    email varchar(50) not null
+    
+);
+
+create table itinerario(
+	
+	idItinerario int unsigned auto_increment primary key,
+	nombre varchar(50)
+    
+);
+
+create table reserva (
+	
+    idReserva int unsigned auto_increment primary key,    
+    fecha date not null,  
+    hora time not null,
+    n_personas int not null,
+    idUsuario int unsigned,
+    foreign key (idUsuario) references usuarios(idUsuario),
+    idItinerario int unsigned,
+    foreign key (idItinerario) references itinerario(idItinerario)   
+    
+);
+
+create table especie (
+	
+    idEspecie int unsigned auto_increment primary key,
+    nombre varchar(50)
+    
+);
+
+create table animal (
+	idAnimal int unsigned auto_increment primary key,
+	nombre varchar(50),
+	idEspecie int unsigned,
+	foreign key (idEspecie) references especie(idEspecie)
+    
+);
+
+create table zona (
+	idItinerario int unsigned ,
+	idAnimal int unsigned ,
+	foreign key (idItinerario) references itinerario(idItinerario),
+	foreign key (idAnimal) references animal(idAnimal),
+	primary key (idItinerario, idAnimal),
+	orden int unsigned not null
+);
