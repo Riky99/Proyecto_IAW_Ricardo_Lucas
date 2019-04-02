@@ -80,7 +80,7 @@
 								var_dump($consulta);
 								$result = $connection->query($consulta);
 								if (!$result) {
-									echo "Query Error";
+									echo "Email ya registrado";
 							} else {
 									echo "Usuario Registrado";
 								}

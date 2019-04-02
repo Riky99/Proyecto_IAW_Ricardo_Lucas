@@ -4,6 +4,11 @@
 	
 }
 
+.navbar-brand {
+	color: #F9F9F9;
+	font-family: "Arial", serif;
+}
+
 #login {
 
 	width: 100%;
@@ -18,7 +23,7 @@
 	height: 120px;	
 	margin-bottom: 100px;
 	background-color: rgba(0, 0, 0, 0.5);
-    color:#000;
+    color: #F8F4F4;
 }
 
 #contenedor {
@@ -37,5 +42,12 @@
 	height: 120px;
 	background-color: rgba(0, 0, 0, 0.5);
     color:#000;
+
+}
+
+label{
+
+	color: #F9F9F9;
+	font-family: "Arial", serif;
 
 }
