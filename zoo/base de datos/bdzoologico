@@ -1,13 +1,10 @@
-create database zoo;
-use zoo;
-
 create table usuarios (
 	
     idUsuario int unsigned auto_increment primary key,
     nombre varchar(50) not null,
     apellidos varchar(50) not null,
-    contraseña varchar(64) not null,
-    email varchar(50) not null
+    password varchar(50) not null,
+    email varchar(50) not null unique
     
 );
 
@@ -54,3 +51,5 @@ create table zona (
 	primary key (idItinerario, idAnimal),
 	orden int unsigned not null
 );
+
+
