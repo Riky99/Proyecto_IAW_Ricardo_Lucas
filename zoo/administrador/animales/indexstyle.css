@@ -1,0 +1,57 @@
+*{
+
+	box-sizing: border-box;
+	
+}
+
+#index {
+
+	width: 100%;
+	background-image: url(../proyectophp/fondo1.jpg);
+	background-repeat: no-repeat;
+
+}
+
+#cabecera {
+
+	width: 100%;
+	height: 120px;	
+	margin-bottom: 100px;
+	background-color: rgba(0, 0, 0, 0.5);
+    color:#000;
+}
+
+#contenedor {
+
+	margin-bottom: 80px;
+	float: none;
+	margin: 0px auto;
+	width: 50%;
+	height: 20em;
+}
+
+#footer {
+
+	margin-top: 10px;
+	width: 100%;
+	height: 120px;
+	background-color: rgba(0, 0, 0, 0.5);
+    color:#000;
+
+}
+
+#editar {
+	width: 40px;
+	float: right;
+}
+
+#recargar {
+
+	padding: 10px;
+	background-color: #FFFFFF;
+}
+/*
+$especie=$_GET['idEspecie'];
+				$consulta1="SELECT nombre FROM especie WHERE idEspecie='$especie'";
+				$result1 = $connection->query($consulta1);
+				echo $consulta1;*/
