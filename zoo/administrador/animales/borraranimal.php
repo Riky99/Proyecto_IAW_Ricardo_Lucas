@@ -10,7 +10,7 @@ $result = $connection->query($consulta);
 if (!$result) {
 	echo "error";
 } else {
-	header('Location: especies.php	');
+	header('Location: animales.php');
 }
 
 ?>
