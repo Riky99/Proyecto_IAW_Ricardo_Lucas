@@ -4,7 +4,8 @@ create table usuarios (
     nombre varchar(50) not null,
     apellidos varchar(50) not null,
     password varchar(50) not null,
-    email varchar(50) not null unique
+    email varchar(50) not null unique,
+    tipo varchar(50) not null default "normal"
     
 );
 
@@ -51,5 +52,3 @@ create table zona (
 	primary key (idItinerario, idAnimal),
 	orden int unsigned not null
 );
-
-
