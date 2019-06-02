@@ -4,6 +4,11 @@
 	
 }
 
+.navbar-brand {
+	color: #F9F9F9;
+	font-family: "Arial", serif;
+}
+
 #index {
 
 	width: 100%;

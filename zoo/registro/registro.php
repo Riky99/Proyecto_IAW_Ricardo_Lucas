@@ -38,13 +38,10 @@
 				<div class="col-md-12">
 					<div class="panel panel-success">
 						<div class="panel-body">
-							<?php if (!isset($_POST["email"])) : ?>
+							<?php if (!isset($_POST["nombre"])) : ?>
 							<form action="" method="POST" accept-charset="utf-8">
 								<div class="form-group">
-									<input type="text" class="form-control" placeholder="Nombre" value="" name="nombre" required>
-								</div>
-								<div class="form-group">
-									<input type="text" class="form-control" placeholder="Apellidos" value="" name="apellidos" required>
+									<input type="text" class="form-control" placeholder="Nombre de usuario" value="" name="nombre" required>
 								</div>
 								<div class="form-group">
 									<input type="email" class="form-control" placeholder="Correo electronico" value="" name="email" required>
@@ -65,26 +62,25 @@
 							</form>
 							<?php else: ?>
 							<?php
-							echo "<h3>hola</h3>";
-							var_dump($_POST);
-							//CREATING THE CONNECTION
-								$connection = new mysqli("localhost", "root", "Admin2015", "zoo", "3316" );
-							//TESTING IF THE CONNECTION WAS RIGHT
+							
+							
+							$connection = new mysqli("localhost", "root", "Admin2015", "zoo", "3316" );
+							
 							if ($connection->connect_errno) {
-								printf("Connection failed: %s\n", $connection->connect_error);
-								exit();
-								}
-								$codigo=$_POST['nombre'];
-								$consulta= "INSERT INTO usuarios VALUES(null, '".$_POST['nombre']."', '".$_POST['apellidos']."',
-								md5('".$_POST['password']."'),'".$_POST['email']."' )";
-								var_dump($consulta);
-								$result = $connection->query($consulta);
-								if (!$result) {
-									echo "Email ya registrado";
+							printf("Connection failed: %s\n", $connection->connect_error);
+							exit();
+							}
+							
+							$consulta= "INSERT INTO usuarios VALUES(null, '".$_POST['nombre']."',
+							md5('".$_POST['password']."'),'".$_POST['email']."','normal' )";
+							$result = $connection->query($consulta);
+							if (!$result) {
+							echo "Error";
 							} else {
-									echo "Usuario Registrado";
-								}
+							echo "Usuario Registrado";
+							}
 							?>
+							
 							<?php endif ?>
 							
 						</div>

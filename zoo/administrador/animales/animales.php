@@ -1,3 +1,10 @@
+<?php
+	session_start();
+	if ($_SESSION["tipo"]!='admin') {
+		session_destroy();
+		header("Location: ../../login/login.php");
+	}
+?>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -25,10 +32,13 @@
 								<a class="navbar-brand" href="">Inicio</a>
 							</div>
 							<div class="navbar-header">
-								<a class="navbar-brand" href="">Itinerario</a>
+								<a class="navbar-brand" href="../itinerario/itinerario.php">Itinerario</a>
 							</div>
 							<div class="navbar-header">
-								<a class="navbar-brand" href="">Animales</a>
+								<a class="navbar-brand" href="../animales/animales.php">Animales</a>
+							</div>
+							<div class="navbar-header">
+								<a class="navbar-brand" href="../especies/especies.php">Especies</a>
 							</div>
 							<div class="navbar-header">
 								<a class="navbar-brand" href="">Reserva</a>
@@ -46,76 +56,78 @@
 					<div class="panel panel-success">
 						<div class="panel-body">
 							<?php if (!isset($_POST['nombre'])) : ?>
-							<form action="" method="POST" accept-charset="utf-8">
+							<form  method="POST" accept-charset="utf-8">
 								<div class="form-group">
-									<input type="text" class="form-control" placeholder="Animales" value="" name="nombre" required>
+									<div class="row">
+										<div class="col-md-6 col-md-offset-3">
+											<input type="text" class="form-control" placeholder="Añadir animal" name="nombre" required>			
+										</div>													
+									</div>
 								</div>
 								<div class="form-group">
 									<div class="row">
 										<div class="col-md-6 col-md-offset-3" >
-											<input type="submit" class="form-control btn btn-primary" value="Nuevo Animal">
+											<input type="submit" class="form-control btn btn-primary" value="Añadir Animal">
 										</div>
 									</div>
 								</div>
-							</form>
+							</form>							
 							<table>
 								<tbody>
 									<tr>
-										<td>Nombre Del Animal</td>
+										<td>Lista de animales</td>
 									</tr>
 								</tbody>
 							</table>
 							<?php else: ?>
-							<?php							
+							<?php
 							
-								$codigo=$_POST['nombre'];
-								$consulta="INSERT INTO animal VALUES(null, '$codigo' ,null)";						
-								
-								$result = $connection->query($consulta);
-								if (!$result) {
-									echo "error";
-								} else {
-									echo "Animal Registrado";
-									echo "<a id='recargar' href='location.php' ><button class='btn-primary'>Recargar</button></a>";
-								}
-								
-									echo "<p><b>Nombre-></b>".$_POST['nombre']."</p>";
+							$codigo=$_POST['nombre'];
+							$consulta="INSERT INTO animal VALUES(null, '$codigo' ,null)";
+							
+							$result = $connection->query($consulta);
+							if (!$result) {
+							echo "error";
+							} else {
+							echo "Animal Registrado";
+							echo "<a id='recargar' href='location.php' ><button class='btn-primary'>Recargar</button></a>";
+							}						
 							
 							?>
 							<?php endif ?>
 							<?php
 							
-								if ($result = $connection->query("SELECT * FROM animal;")) {
-									printf("<p></p>", $result->num_rows);								
+							if ($result = $connection->query("SELECT * FROM animal;")) {
+							printf("<p></p>", $result->num_rows);
 								
-								echo "<table>";
+							echo "<table>";
 								echo "<tbody>";
-										while ($obj = $result->fetch_object()) {
+									while ($obj = $result->fetch_object()) {
 									echo "<tr>";
 										echo "<td>".$obj->idAnimal."</td>";
-										echo "<td>".$obj->nombre."</td>";										 
+										echo "<td>".$obj->nombre."</td>";
 										echo "<td>"."
 											<a href='editaranimal.php?idAnimal=".$obj->idAnimal."&nombreAnimal=".$obj->nombre."'>
-											<img id='editar' src='./editar.png'></a>
+											<img id='editar' src='../imagenes/editar.png'></a>
 											<a href='borraranimal.php?idAnimal=".$obj->idAnimal."'>
-											<img id='borrar' src='./borrar.png'></a> </td>";
+											<img id='borrar' src='../imagenes/borrar.png'></a> </td>";
 									echo "</tr>";
-								}
+										}
 								echo "<tbody>";
-								echo "</table>";
-								$result->close();
-								unset($obj);
-								unset($connection);
+							echo "</table>";
+							$result->close();
+							unset($obj);
+							unset($connection);
 							}
 							?>
-							
+										
+									</div>
+									
+								</div>
+								
+							</div>
 						</div>
 						
 					</div>
-					
-				</div>
-			</div>
-			
-		</div>
-	</body>
-</html>
+				</body>
+			</html>

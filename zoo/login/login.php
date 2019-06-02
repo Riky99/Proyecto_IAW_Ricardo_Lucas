@@ -1,3 +1,6 @@
+<?php
+	session_start();
+?>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -25,6 +28,9 @@
 								<a class="navbar-brand" href="">Animales</a>
 							</div>
 							<div class="navbar-header">
+								<a class="navbar-brand" href="">Especies</a>
+							</div>
+							<div class="navbar-header">
 								<a class="navbar-brand" href="">Reserva</a>
 							</div>
 							
@@ -39,12 +45,12 @@
 					<div class="panel panel-success">
 						<div class="panel-body">
 							
-							<form action="" method="POST" accept-charset="utf-8">
+							<form method="post" accept-charset="utf-8">
 								
-								<label>Email: </label>
-								<input type="text" class="form-control" placeholder="email" name="email" value="" required>
+								<label>Nombre de usuario: </label>
+								<input type="text" class="form-control" placeholder="Nombre de usuario" name="nombre" required>
 								<label>Contraseña</label>
-								<input type="password" class="form-control" placeholder="Contraseña" name="password" value="" required>
+								<input type="password" class="form-control" placeholder="Contraseña" name="password" required>
 								
 								
 							</div>
@@ -55,31 +61,33 @@
 						</form>
 						
 						<?php
-						//FORM SUBMITTED
-						if (isset($_POST["email"])) {
-						//CREATING THE CONNECTION
+						
+						if (isset($_POST["nombre"])) {
+						
 						$connection = new mysqli("localhost", "root", "Admin2015", "zoo", "3316");
-						//TESTING IF THE CONNECTION WAS RIGHT
+						
 						if ($connection->connect_errno) {
 						printf("Connection failed: %s\n", $connection->connect_error);
 						exit();
 						}
-						//MAKING A SELECT QUERY
-						//Password coded with md5 at the database. Look for better options
+						
 						$consulta="select * from usuarios where
-						email='".$_POST["email"]."' and password=md5('".$_POST["password"]."');";
-						//Test if the query was correct
-						//SQL Injection Possible
-						//Check http://php.net/manual/es/mysqli.prepare.php for more security
+						nombre='".$_POST["nombre"]."' and password = md5('".$_POST["password"]."');";
+						
 						if ($result = $connection->query($consulta)) {
-						//No rows returned
+						
 						if ($result->num_rows===0) {
 						echo "LOGIN INVALIDO";
 						} else {
-						//VALID LOGIN. SETTING SESSION VARS
-						$_SESSION["email"]=$_POST["email"];
-						$_SESSION["language"]="es";
+						
+						$_SESSION["nombre"]=$_POST["nombre"];
+								$user=$result->fetch_object();
+						$_SESSION["tipo"]=$user->tipo;
+						if ($user->tipo=="admin") {
+						header("Location: ../administrador/itinerario/itinerario.php");
+						}else {
 						header("Location: ../index.php");
+						}
 						}
 						} else {
 						echo "Wrong Query";

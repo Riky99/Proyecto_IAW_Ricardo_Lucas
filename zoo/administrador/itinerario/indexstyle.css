@@ -12,13 +12,13 @@
 #index {
 
 	width: 100%;
-	background-image: url(../proyectophp/fondo1.jpg);
+	/*background-image: url(../proyectophp/fondo1.jpg);*/
 	background-repeat: no-repeat;
 
 }
 
 #cabecera {
-
+	
 	width: 100%;
 	height: 120px;	
 	margin-bottom: 100px;
@@ -45,6 +45,7 @@
 
 }
 
+
 #recargar {
 
 	padding: 10px;
@@ -52,6 +53,11 @@
 }
 
 #editar {
-	
-	margin: 40px;
--
+
+	margin:40px;
+
+}
+
+
+
+

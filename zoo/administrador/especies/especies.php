@@ -1,3 +1,10 @@
+<?php 
+	session_start();
+	if ($_SESSION["tipo"]!='admin') {
+		session_destroy();
+		header("Location: ../../login/login.php");
+	}
+ ?>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -25,10 +32,13 @@
 								<a class="navbar-brand" href="">Inicio</a>
 							</div>
 							<div class="navbar-header">
-								<a class="navbar-brand" href="">Itinerario</a>
+								<a class="navbar-brand" href="../itinerario/itinerario.php">Itinerario</a>
 							</div>
 							<div class="navbar-header">
-								<a class="navbar-brand" href="">Animales</a>
+								<a class="navbar-brand" href="../animales/animales.php">Animales</a>
+							</div>
+							<div class="navbar-header">
+								<a class="navbar-brand" href="../especies/especies.php">Especies</a>
 							</div>
 							<div class="navbar-header">
 								<a class="navbar-brand" href="">Reserva</a>
@@ -97,9 +107,9 @@
 											echo "<td>".$obj->nombre."</td>";
 											echo "<td>"."
 												<a href='editarespecie.php?idEspecie=".$obj->idEspecie."&nombreEspecie=".$obj->nombre."'>
-												<img id='editar' src='./editar.png'></a>
+												<img id='editar' src='../imagenes/editar.png'></a>
 												<a href='borrarespecie.php?idEspecie=".$obj->idEspecie."'>
-												<img id='borrar' src='./borrar.png'></a> </td>";
+												<img id='borrar' src='../imagenes/borrar.png'></a> </td>";
 											echo "</tr>";
 										}
 									echo "</tbody>";

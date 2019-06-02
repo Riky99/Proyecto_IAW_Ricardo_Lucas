@@ -4,10 +4,15 @@
 	
 }
 
+.navbar-brand {
+	color: #F9F9F9;
+	font-family: "Arial", serif;
+}
+
 #index {
 
 	width: 100%;
-	background-image: url(../proyectophp/fondo1.jpg);
+	/*background-image: url(../proyectophp/fondo1.jpg);*/
 	background-repeat: no-repeat;
 
 }
@@ -40,18 +45,14 @@
 
 }
 
-#editar {
-	width: 40px;
-	float: right;
-}
-
 #recargar {
 
 	padding: 10px;
 	background-color: #FFFFFF;
 }
-/*
-$especie=$_GET['idEspecie'];
-				$consulta1="SELECT nombre FROM especie WHERE idEspecie='$especie'";
-				$result1 = $connection->query($consulta1);
-				echo $consulta1;*/
+
+#editar {
+
+	margin:40px;
+
+}
