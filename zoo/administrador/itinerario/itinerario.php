@@ -1,10 +1,5 @@
-<?php 
-	session_start();
-	if ($_SESSION["tipo"]!='admin') {
-		session_destroy();
-		header("Location: ../../login/login.php");
-	}
- ?>
+<?php include("../include/sesion.php"); ?>
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -12,53 +7,38 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<title>Admin Itinerario</title>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 		<link rel="stylesheet" href="./indexstyle.css" type="text/css">
 	</head>
 	<body>
-		<?php
-		$connection = new mysqli("localhost", "root", "Admin2015", "zoo", "3316" );
-		if ($connection->connect_errno) {
-				printf("Connection failed: %s\n", $connection->connect_error);
-					exit();
-		}
-		?>
+	<?php include("../include/conexion.php"); ?>
+
 		<div class="container-fluid" id="index">
-			<div class="row " id="cabecera">
-				<div class="col-md-12">
-					<nav class="navbar navbar-nav">
-						<div class="container-fluid">
-							<div class="navbar-header">
-								<a class="navbar-brand" href="">Inicio</a>
-							</div>
-							<div class="navbar-header">
-								<a class="navbar-brand" href="../itinerario/itinerario.php">Itinerario</a>
-							</div>
-							<div class="navbar-header">
-								<a class="navbar-brand" href="../animales/animales.php">Animales</a>
-							</div>
-							<div class="navbar-header">
-								<a class="navbar-brand" href="../especies/especies.php">Especies</a>
-							</div>
-							<div class="navbar-header">
-								<a class="navbar-brand" href="">Reserva</a>
-							</div>
-							
-						</div>
-					</nav>
-					
-				</div>
-				
-			</div>
+
+			<?php include("../include/header.php"); ?>
+			<?php include("../include/imgcerrarsesion.php"); ?>
+			 
+	   		 
 			<div class="row justify-content-center" id="contenedor">
-				<div class="col-md-12">
+				<div class="col-sm-12">
 					<div class="panel panel-success">
 						<div class="panel-body">
 							<?php if (!isset($_POST['nombre'])) : ?>
 							<form method="POST" accept-charset="utf-8">
 								<div class="form-group">
 									<div class="row">
-										<div class="col-md-6 col-md-offset-6">
+										<div class="mx-auto">
+											<h3>Administrador de Itinerarios</h3>
+										</div>
+										
+									</div>
+									
+								</div>
+								<div class="form-group">
+									<div class="row">
+										<div class=" col-sm-3">
+											<h5>Añadir Itinerario: </h5>
+										</div>
+										<div class="col-sm-6 col-md-offset-6">
 											<input type="text" class="form-control" placeholder="Añadir itinerario" name="nombre" required>
 											
 										</div>
@@ -67,57 +47,64 @@
 								</div>
 								<div class="form-group">
 									<div class="row">
-										<div class="col-md-6 col-md-offset-3" >
+										<div class="col-sm-4 col-md-offset-3" >
 											<input type="submit" class="form-control btn btn-primary" value="Añadir Itinerario">
+											
 										</div>
 									</div>
 								</div>
 								
 							</form>
-							<table>
-								<tbody>
+							<table class="table">
+								<thead>
 									<tr>
-										<td>Lista de itinerarios</td>
+										<th>idItinerario</th>
+										<th>Itinerario</th>										
+										<th></th>
+										<th></th>
 									</tr>
-								</tbody>
-							</table>
+								</thead>
+							
 							<?php else: ?>
 							<?php
-								$codigo=$_POST['nombre'];
-								$consulta="INSERT INTO itinerario VALUES(null, '$codigo')";
+								$idItinerario=$_POST['idItinerario'];
+								$nombre=$_POST['nombre'];		
+								
+								$consulta="INSERT INTO itinerario VALUES('$idItinerario', '$nombre')";
 								$result = $connection->query($consulta);
 								if (!$result) {
 									echo "error";
-									} else {
-										echo "Itinerario Registrado";
-										echo "<a id='recargar' href='location.php' ><button class='btn-primary'>Recargar</button></a>";
-											}
+
+									
+								} else {
+									echo "Itinerario Registrado";
+									header('Location: itinerario.php');	
+							}
 							?>
-							
 							<?php endif ?>
 							<?php
-								if ($result = $connection->query("SELECT * FROM itinerario;")) {
-									printf("<p></p>", $result->num_rows);
-									echo "<table>";
-									echo "<tbody>";
-									while ($obj = $result->fetch_object()) {
-									echo "<tr>";
-									echo "<td>".$obj->idItinerario."</td>";
-									echo "<td>".$obj->nombre."</td>";
-									echo "<td>" ."<a href='editaritinerario.php?idItinerario=".$obj->idItinerario."&nombreItinerario=".$obj->nombre."'>
-										<img id='editar' src='../imagenes/editar.png'></a>
-										<a href='borraritinerario.php?idItinerario=".$obj->idItinerario."'>
-										<img id='borrar' src='../imagenes/borrar.png'></a> </td>";
-									echo "</tr>";
-									}
-									echo "<tbody>";
-									echo "</table>";
-									$result->close();
-									unset($obj);
-									unset($connection);
-										}
+							if ($result = $connection->query("SELECT * FROM itinerario")) {
+										echo "<tbody>";
+											while ($obj = $result->fetch_object()) {
+												echo "<tr>";
+													echo "<td><span class='badge badge-secondary'>".$obj->idItinerario."<span></td>";
+													echo "<td>".$obj->nombre."</td>";													
+													echo "<td>" ."<a href='editaritinerario.php?idItinerario=".$obj->idItinerario."&nombreItinerario=".$obj->nombre."'>
+														<img id='editar' src='../imagenes/editar.png'></a></td>";
+
+													echo "<td>" ."<a href='borraritinerario.php?idItinerario=".$obj->idItinerario."  '>
+														<img id='borrar' src='../imagenes/borrar.png'></a></td>";
+												echo "</tr>";
+											}
+										echo "</tbody>";
+
+											$result->close();
+											unset($obj);
+											unset($connection);
+												}
+
 									?>
-									
+									</table>
 								</div>
 								
 							</div>

@@ -1,8 +1,10 @@
+drop database zoo;
+create database zoo;
+use zoo;
 create table usuarios (
 	
     idUsuario int unsigned auto_increment primary key,
     nombre varchar(50) not null,
-    apellidos varchar(50) not null,
     password varchar(50) not null,
     email varchar(50) not null unique,
     tipo varchar(50) not null default "normal"
@@ -12,8 +14,7 @@ create table usuarios (
 create table itinerario(
 	
 	idItinerario int unsigned auto_increment primary key,
-	nombre varchar(50)
-    
+	nombre varchar(50)    
 );
 
 create table reserva (
@@ -52,3 +53,4 @@ create table zona (
 	primary key (idItinerario, idAnimal),
 	orden int unsigned not null
 );
+

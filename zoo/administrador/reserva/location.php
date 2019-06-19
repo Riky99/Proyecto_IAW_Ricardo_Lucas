@@ -9,7 +9,7 @@
 <body>
 	
 	<?php 
-		header('Location: animales.php');
+		header('Location: reserva.php');
 	 ?>
 	
 </body>

@@ -18,28 +18,47 @@
 }
 
 #cabecera {
-
+	
 	width: 100%;
-	height: 120px;		
+	height: 120px;
 	background-color: rgba(0, 0, 0, 0.5);
     color:#000;
 }
 
 #contenedor {
-	
+
 	float: none;
 	margin: 0px auto;
-	width: 50%;
+	width: 70%;
 	height: 20em;
 }
 
 #footer {
 
-	margin-top: 10px;
 	width: 100%;
 	height: 120px;
 	background-color: rgba(0, 0, 0, 0.5);
     color:#000;
 
 }
+
+#recargar {
+
+	background-color: #FFFFFF;
+}
+
+
+#n_personas {
+
+	width: 40px;
+	height: 40px;
+}
+
+.head_reserva {
+
+	background-color: black;
+	color: #FFFFFF;
+
+}
+
 
